@@ -1,19 +1,18 @@
 <template>
 	<scroll-view scroll-x class="nav">
-		<view class="flex text-center bg-red  light">
+		<view class="flex text-center bg-red light navBar">
 			<view class="cu-item flex-sub tab" :class="index==TabCur?'bg-red':''" v-for="(item,index) in navlist" :key="index" @tap="tabSelect($event)" :data-id="index">
 				{{item}}
 			</view>
 		</view>
-		<view class="cu-card  article" v-if="TabCur==0">
+		<search></search>
+		<view class="cu-card article" v-if="TabCur==0">
 			<find-cloth  v-for="(item,index) in findClothList"
 				:title="item.title"
 				:img="item.img"
 				:price="item.price"
 				:time="item.time"
-				:attention="item.attention"
-				:appreciate="item.appreciate"
-				:message="item.message">
+				:type="item.type">
 			</find-cloth>
 		</view>
 		<view class="cu-card article" v-if="TabCur==1">
@@ -55,22 +54,24 @@
 	import newCloth from './newCloth.vue'
 	import store from './store.vue'
 	import notice from './notice.vue'
+	import search from './search.vue'
 	export default{
 		components:{
 			findCloth,
 			newCloth,
 			store,
 			notice,
+			search
 		},
 		data(){
 			return {
 				navlist:['找布','新布','店铺','通知'],
 				findClothList:[
-					{id:1,title:'请问谁这种布有黄色的吗',img:'../../static/cloth/0-2.jpg',price:'40-50元/斤',time:'2020-3-31',attention:"10",appreciate:"20",message:"30"},
-					{id:2,title:'请问谁这种布涤纶的谁有',img:'../../static/cloth/1-2.jpg',price:'7元/米',time:'2020-3-31',attention:"10",appreciate:"20",message:"30"},
-					{id:3,title:'请问谁家有这种布的吗',img:'../../static/cloth/2-2.jpg',price:'无',time:'2020-3-31',attention:"11",appreciate:"20",message:"30"},
-					{id:4,title:'请问谁家有现货的小梅花红色',img:'../../static/cloth/3-2.jpg',price:'45/斤',time:'2020-3-31',attention:"10",appreciate:"20",message:"30"},
-					{id:5,title:'急！谁家的工厂现在可以做星星花',img:'../../static/cloth/4-2.jpg',price:'38元/磅',time:'2020-3-31',attention:"10",appreciate:"20",message:"30"},
+					{id:1,title:'请问谁这种布有黄色的吗',img:'../../static/cloth/0-2.jpg',price:'40-50元/斤',time:'2020-3-31',type:'蕾丝'},
+					{id:2,title:'请问谁这种布涤纶的谁有',img:'../../static/cloth/1-2.jpg',price:'7元/米',time:'2020-3-31',type:'蕾丝'},
+					{id:3,title:'请问谁家有这种布的吗',img:'../../static/cloth/2-2.jpg',price:'无',time:'2020-3-31',type:'网布'},
+					{id:4,title:'请问谁家有现货的小梅花红色',img:'../../static/cloth/3-2.jpg',price:'45/斤',time:'2020-3-31',type:'蕾丝'},
+					{id:5,title:'急！谁家的工厂现在可以做星星花',img:'../../static/cloth/4-2.jpg',price:'38元/磅',time:'2020-3-31',type:'蕾丝'},
 				],
 				newClothList:[
 					{id:6,title:'大梅花涤纶款现在开卖了！',img:'../../static/cloth/5-2.jpg',price:'40/斤',time:'2020-3-31',attention:"10",appreciate:"20",message:"30"},
@@ -102,10 +103,22 @@
 	.nav{
 		padding-bottom: 50px;
 	}
+	.navBar{
+		position: fixed;
+		z-index: 999;
+		top: 0px;
+		width: 100%;
+	}
 	.tab{
 		font-weight: bold;
 		transition: 0.3s;
 		margin: 0;
 		border: 0!important;
+	}
+	.article,.case,.dynamic{
+		width: 100%;
+		margin-top: 100px;
+		display: flex;
+		flex-wrap: wrap;
 	}
 </style>

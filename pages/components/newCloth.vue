@@ -30,6 +30,7 @@
 
 <style scoped>
 	.cu-item{
+		width: 100%;
 		position: relative;
 		height:auto;
 		color:#333333;
